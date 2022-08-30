@@ -13,3 +13,11 @@ To begin prototyping, we extracted 20,000 tweets from the past 7 days using the 
 > fear, fearful, afraid, scared, terrified, worry, worried, anxiety, anxious, distress, concern, dismay, strain,  stress, tension
 - the tweets do not contain the following phrases:
 > "nothing to fear", "fear not", "don't worry", "no worries"
+
+## 2. Data Exploration & Visualization
+
+A deeper dive into the text, tweets, and user data aimed at uncovering:
+- the distribution of tweet & user metrics in the extracted data (typically exponential)
+- the extent of time captured by the initially extracted data (~30-40 minutes worth of tweets)
+- relationships between tweet metrics & user metrics (in progress)
+- common words used in the extracted tweets, user names, and user descriptions (to be re-evaluated post-processing)
