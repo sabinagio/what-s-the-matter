@@ -21,3 +21,21 @@ A deeper dive into the text, tweets, and user data aimed at uncovering:
 - the extent of time captured by the initially extracted data (~30-40 minutes worth of tweets)
 - relationships between tweet metrics & user metrics (in progress)
 - common words used in the extracted tweets, user names, and user descriptions (to be re-evaluated post-processing)
+
+## 3. Data Preprocessing
+
+Before we create a model to discover the topics people have been fearful about, we need to preprocess the data. The typical steps include:
+- Converting text to lowercase
+- Removing stopwords, punctuation, URLs, retweet mark (RTs), and username handles (@user)
+- Spelling correction
+- Tokenizing strings
+
+In addition to the previous steps, we will perform combinations of the transformations below and see how each choice affects our models:
+- Removing emojis / Translating the emoji meaning into a word (to help the model with fear sentiment analysis)
+- Performing stemming / lemmatization
+
+## 4. Feature engineering
+
+To perform further analysis of our dataset, we will also add the following features:
+- word, character, and special characters count before preprocessing
+- word, character, and keyword count postprocessing
