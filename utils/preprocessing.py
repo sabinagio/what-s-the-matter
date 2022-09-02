@@ -20,8 +20,6 @@ def clean_text(text):
     text = re.compile('[%s]' % re.escape(string.punctuation)).sub(' ', text) 
     # Remove URLs
     text = re.compile('https?://S+|www.S+').sub('', text) 
-    # Replace double space with single space 
-    text = re.sub('\s+', ' ', text) 
     # Replace numbers by a single space
     text = re.sub(r'\[[0-9]*\]',' ', text)  
     # Get rid of decimal digits   
