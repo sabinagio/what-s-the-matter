@@ -1,17 +1,19 @@
 [tool.poetry]
-name = "what-s-the-matter"
+name = "twitter_project"
 version = "0.1.0"
 description = ""
 authors = ["sabinagio <sabinagiorgiana@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-nltk = "^3.7"
-textblob = "^0.17.1"
-wordcloud = "^1.8.2"
 plotly = "^5.10.0"
-ipykernel = "^6.15.2"
+nltk = "^3.7"
+wordcloud = "^1.8.2"
+numpy = "^1.23.2"
 jupyter = "^1.0.0"
+notebook = "^6.4.12"
+ipykernel = "^6.15.2"
+emoji = "^2.1.0"
 
 [tool.poetry.dev-dependencies]
 
