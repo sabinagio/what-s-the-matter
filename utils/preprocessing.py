@@ -122,3 +122,29 @@ def translate_emojis(df, text_col="text"):
 
         # Append translated emojis to dataframe
         df["emojis"] = matches
+
+
+def text_features(df, text_col="text", prefix="pre"):
+    
+    """
+    Function to add columns to the dataframe with word count, character count, and
+    special characters count pre- and post-processing
+
+    Arguments
+
+    df = the dataframe to add columns to
+    text_col = the name of the dataframe column which hosts the text
+    prefix = the prefix for the resulting columns, e.g. "pre_word_count", "post_word_count" 
+    """
+    
+    df[prefix + "_word_count"] = df[text_col].apply(lambda x: len(x.split(" ")))
+    df[prefix + "_char_count"] = df[text_col].apply(lambda x: len(x))
+
+    def count_special_chars(text):
+        char_no = 0
+        for char in text:
+            if char.isalnum() == False:
+                char_no += 1
+        return char_no
+
+    df[prefix + "_spec_char_count"] = df[text_col].apply(lambda x: count_special_chars(x))
