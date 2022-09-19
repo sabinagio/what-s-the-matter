@@ -1,4 +1,6 @@
 import re
+import numpy as np
+import pandas as pd
 import string
 import emoji
 from textblob import TextBlob #spelling correction
@@ -113,7 +115,7 @@ def translate_emojis(df, text_col="text"):
                                    "]+", flags = re.UNICODE)
 
         # Return emojis found and translate each into a Pandas Series
-        matches = pd.Series(map(lambda x: pattern.findall(x), df['text']))
+        matches = pd.Series(map(lambda x: pattern.findall(x), df[text_col]))
         matches = matches.apply(lambda x: "".join(x))
         matches = matches.apply(lambda x: emoji.demojize(x))
         matches = matches.apply(lambda x: np.nan if x == "" else x)
