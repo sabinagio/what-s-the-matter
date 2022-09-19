@@ -134,17 +134,40 @@ def text_features(df, text_col="text", prefix="pre"):
 
     df = the dataframe to add columns to
     text_col = the name of the dataframe column which hosts the text
-    prefix = the prefix for the resulting columns, e.g. "pre_word_count", "post_word_count" 
+    step = the prefix for the resulting columns and the moment of the
+            transformation. Can only be "pre" or "post". 
     """
+
+    df[prefix.lower() + "_word_count"] = df[text_col].apply(lambda x: len(x.split(" ")))
+    df[prefix.lower() + "_char_count"] = df[text_col].apply(lambda x: len(x))
+
+    if prefix.lower() == "pre":
     
-    df[prefix + "_word_count"] = df[text_col].apply(lambda x: len(x.split(" ")))
-    df[prefix + "_char_count"] = df[text_col].apply(lambda x: len(x))
+        def count_special_chars(text):
+            char_no = 0
+            for char in text:
+                if char.isalnum() == False:
+                    char_no += 1
+            return char_no
 
-    def count_special_chars(text):
-        char_no = 0
-        for char in text:
-            if char.isalnum() == False:
-                char_no += 1
-        return char_no
+        df[prefix.lower() + "_spec_char_count"] = df[text_col].apply(lambda x: count_special_chars(x))
 
-    df[prefix + "_spec_char_count"] = df[text_col].apply(lambda x: count_special_chars(x))
+    elif prefix.lower() == "post":
+
+        keywords = ["fear", "fearful", "afraid", "scared", "terrified", "worry", \
+            "worried", "anxiety", "anxious", "distress", "concern", "dismay", "strain",\
+            "stress", "tension", "terror", "alarm", "panic", "unease", "scare",\
+            "afraid of", "careful about"]
+
+        def count_keywords(text):
+            keyw_no = 0
+            words = text.split(" ")
+            for keyw in words:
+                if keyw in keywords:
+                    keyw_no += 1
+            return keyw_no
+
+        df[prefix.lower() + "_keyword_count"] = df[text_col].apply(lambda x: count_keywords(x))
+
+    else:
+        print("The prefix can only be 'post' or 'pre'!")
